@@ -1,0 +1,26 @@
+이번 시간에는 맨 처음 counter=0인 상태에서 render링 하고
+counter가 업데이트 될 때마다 화면을 다시 rendering하려고 한다.
+이 때 react에서 자동으로 화면을 재구성(render)하는 방법을 배워보자.
+
+const data = React.useState();
+를 사용하면 Array[초기값, f]를 받는데, 이 때 f는 초기값을 바꾸는 역할을 한다.
+
+먼저, data[0], data[1]과 같이 각 원소에 접근하는 것은 구리다.
+그래서 unpacking을 활용하여 '변수이름'을 지어주자.
+
+ex)
+const food = ['toamato', 'potato']
+const [myFavFood, mySecondFavFood] = food;
+
+이제 위의 방법을 통해 다시 useState를 사용하자.
+const [counter, modifier] = React.useState(0); 이 때 0은 초기값이다.
+
+우리는 이제 값을 바꿔주어야 하기 때문에 const -> let을 사용해주자.
+onClick을 만들어주고, 버튼과 연결했다.
+하지만 아직도 rerender을 해결하지 못했다. 이번엔 새로운 값을 가지고 render하게 해보자.
+
+"modifier"를 사용하면 이 모든 것이 해결된다.
+let을 사용할 필요도 없고, 값을 바꾸고 다시 화면을 render하는 과정을 modifier가 다 해결해준다.
+
+modifier(변경할값) 은 초기값을 변경할값으로 바꾸고 화면을 재구성(render)한다.
+이 모든 과정에서 화면은 딱 필요한 부분만 업데이트 된다!
