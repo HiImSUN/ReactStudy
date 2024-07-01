@@ -1,0 +1,8 @@
+습작에서 Minutes -> Hours 예시를 만들었었고
+이번엔 Km -> Miles를 만들었다.
+이를 상황에 따라 다르게 rendering해서 보여주고 싶다.
+이런 상황에 필요한 것이 divide & conquer이다.
+분리해서 상황에 맞게 render해주는 것이다.
+const [index, setIndex] = React.useState("0");
+{index === "0" ? <MinutesToHours /> : null}
+{index === "1" ? <KmToMiles /> : null}
