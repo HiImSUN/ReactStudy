@@ -1,1 +1,41 @@
 Props란 일종의 방식이다. 부모 컴포넌트로부터 자식 컴포넌트에 데이터를 보낼 수 있게 해주는 방식.
+
+만약 어떤 Application에서 반복되는 버튼들을 일일이
+function App() {
+      return (
+        <div>
+          <SaveBtn />
+          <ConfirmBtn />
+        </div>
+      );
+    }
+와 같이 개별구성 한다면 매우매우 피곤하고 번거로울 것이다.
+
+이제
+텍스트만 변경할 수 있고 반복되는 내용은 생략할 수 있게 해보자.
+function Btn(props) {
+      return (
+        <button
+          style={{
+            backgroundColor: "tomato",
+            color: "white",
+            padding: "10px 20px",
+            border: 0,
+            borderRadius: 10,
+          }}
+        >
+          {props.banana}
+        </button>
+      );
+    }
+
+function App() {
+      return (
+        <div>
+          <Btn banana="Save Changes" />
+          <Btn banana="Continue" />
+        </div>
+      );
+    }
+
+위와 같은 경우에 props는 인자로 banana 뿐만 아니라 여러가지가 담긴 object가 전달되는 것이다.
