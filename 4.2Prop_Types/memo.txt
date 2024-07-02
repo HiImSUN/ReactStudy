@@ -1,0 +1,24 @@
+이제 "Props Types"에 대해 알아보자.
+왜냐면 컴포넌트를 다룰 때 우리가 알아야 하는 것들 중에 가장 마지막이기 때문이다.
+
+props는 우리가 원하는 어떤 정보든 보낼 수 있게 해준다.
+하지만 이 말은 우리가 원하지 않는 정보도 전달가능하다는 뜻이다. (실수에 의해)
+이러한 실수는 props들이 많을 때 종종 발생할 것이고, 타인과의 협업에 의해서도 실수가 발생하기도 한다.
+
+예를 들어
+<Btn text="Save Changes" fontSize={18} />
+과 같이 전달해야하는 곳에
+<Btn text={18} fontSize="Save Changes" />
+와 같이 전달했다면 놀랍게도 Syntax 에러는 아니다.
+이와 같은 사고를 방지하기 위해 우리가 text에 무엇을 받고 싶어하는지를 명시해주면 좋겠다.
+
+<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+
+Btn.propTypes = {
+      text: PropTypes.string,
+      fontSize: PropTypes.number,
+    };
+
+이것을 통해 해결할 수 있다.
+자세한 설명(number인지 string인지 등)은
+https://legacy.reactjs.org/docs/typechecking-with-proptypes.html 에 가보면 볼 수 있다.
