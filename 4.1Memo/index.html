@@ -7,29 +7,33 @@
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    // 혹은 Btn({banana}) 와 같이 사용해도 됨.
-    function Btn({ text, big }) {
+    function Btn({ text, changeText }) {
+      React.useEffect(() => {
+        console.log(`${text} was rendered`);
+      }, [text]);
       return (
         <button
+          onClick={changeText}
           style={{
             backgroundColor: "tomato",
             color: "white",
             padding: "10px 20px",
             border: 0,
             borderRadius: 10,
-            fontSize: big ? 20 : 16,
           }}
         >
           {text}
         </button>
       );
     }
-
+    const MemorizedBtn = React.memo(Btn);
     function App() {
+      const [text, setText] = React.useState("Save Changes");
+      const changeText = () => setText("Revert Changes");
       return (
         <div>
-          <Btn text="Save Changes" big={true} />
-          <Btn text="Continue" big={false} />
+          <MemorizedBtn text={text} changeText={changeText} />
+          <MemorizedBtn text="Continue" />
         </div>
       );
     }

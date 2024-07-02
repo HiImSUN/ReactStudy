@@ -1,0 +1,53 @@
+저번 예제에 이어 이번엔 onClick function을 만들어주고 싶다.
+
+onClick을 html-css쪽에 넣어주면 event listener가 되지만,
+나의 custom button의 'property'로 넣어주면 하나의 멤버가 될 뿐이다.
+ex) <Btn onClick={onClick} />
+이 뜻은 prop으로 숫자, 문자, bool 외에도 함수도 전달할 수 있음을 의미한다.
+
+우리가 한 행동들은 super cool하다!
+부모의 상태를 바꾸는 함수를 만들었고,
+버튼을 호출하며 그 함수가 자식단에서 실행된다.
+    function App() {
+      const [text, setText] = React.useState("Save Changes");
+      const changeText = () => setText("Revert Changes");
+      return (
+        <div>
+          <Btn text={text} changeText={changeText} />
+          <Btn text="Continue" />
+        </div>
+      );
+    }
+이 버튼을 보면 첫번째 버튼을 누르면 prop이 변경되므로 화면이 re-render된다. 하지만 두번째 버튼은
+굳이 다시 render할 필요가 없으므로 Memo(rize)를 통해 react에게 굳이 render할 필요 없다고 의사전달을 해보자.
+이를 우리는 React Memo라고 부른다.
+
+    function Btn({ text, changeText }) {
+      React.useEffect(() => {
+        console.log(`${text} was rendered`);
+      }, [text]);
+      return (
+        <button
+          onClick={changeText}
+        >
+          {text}
+        </button>
+      );
+    }
+    const MemorizedBtn = React.memo(Btn);
+    function App() {
+      const [text, setText] = React.useState("Save Changes");
+      const changeText = () => setText("Revert Changes");
+      return (
+        <div>
+          <MemorizedBtn text={text} changeText={changeText} />
+          <MemorizedBtn text="Continue" />
+        </div>
+      );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
+</html>
+
+위와같이 바꾸는 것은 tiny bonus다. 조만간 사용할 일이 없을 수도 있다. 하지만 이것을 알아두는 것과 모르는 것은 큰 차이가 있다.
