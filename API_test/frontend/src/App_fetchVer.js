@@ -1,33 +1,30 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
-
-const SERVER_URL = "http://localhost:4000/api/todo";
 
 function App() {
   const [todoList, setTodoList] = useState([]);
-  const fetchData = async () => {
-    const response = await axios.get(SERVER_URL);
-    setTodoList(response.data);
+  const fetchData = () => {
+    fetch("http://localhost:4000/api/todo")
+      .then((response) => response.json())
+      .then((data) => setTodoList(data));
+    console.log("rendered");
   };
   useEffect(() => {
     fetchData();
   }, []);
-  const onSubmitHandler = async (event) => {
+  const onSubmitHandler = (event) => {
     event.preventDefault();
     const text = event.target.text.value;
     const done = event.target.done.checked;
-    await axios.post(SERVER_URL, { text, done });
-    fetchData();
-    // fetch("http://localhost:4000/api/todo", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     text,
-    //     done,
-    //   }),
-    // }).then(() => fetchData());
+    fetch("http://localhost:4000/api/todo", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        text,
+        done,
+      }),
+    }).then(() => fetchData());
   };
   return (
     <div className="App">
@@ -49,4 +46,4 @@ function App() {
   );
 }
 
-export default App;
+export default App_fetchVer;
