@@ -1,0 +1,4 @@
+이번시간에는 Router라는 개념을 공부했다.
+페이지의 역할인데, App.js가 Router를 렌더링하고,
+Router는 url에 맞게 다른 것을 보여주는 것이다.
+그래서 새로운 폴더 components 와 routes가 생겼다.
