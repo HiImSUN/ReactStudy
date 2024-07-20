@@ -2,3 +2,5 @@
 페이지의 역할인데, App.js가 Router를 렌더링하고,
 Router는 url에 맞게 다른 것을 보여주는 것이다.
 그래서 새로운 폴더 components 와 routes가 생겼다.
+
+Link to 라는 기능은 페이지를 새로고침하지 않고 url을 이동시킨다.
